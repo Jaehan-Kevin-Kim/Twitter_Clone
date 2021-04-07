@@ -1,31 +1,45 @@
 import { dbService } from 'fBase';
 import React, { useEffect, useState } from 'react';
 
-const Home = () => {
+const Home = ({ userObj }) => {
+  // console.log(userObj);
   const [tweet, setTweet] = useState('');
   const [tweets, setTweets] = useState([]);
-  const getTweets = async () => {
-    const dbTweets = await dbService.collection('tweets').get();
-    console.log(dbTweets);
-    // dbTweets.forEach((document) => console.log(document.data()));
-    dbTweets.forEach((document) => {
-      const tweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setTweets((prev) => [tweetObject, ...prev]);
-    });
-  };
+  // const getTweets = async () => {
+  //   const dbTweets = await dbService.collection('tweets').get();
+  //   // console.log(dbTweets);
+  //   // dbTweets.forEach((document) => console.log(document.data()));
+  //   dbTweets.forEach((document) => {
+  //     const tweetObject = {
+  //       ...document.data(),
+  //       id: document.id,
+  //     };
+  //     setTweets((prev) => [tweetObject, ...prev]);
+  //   });
+  // };
 
   useEffect(() => {
-    getTweets();
+    // getTweets();
+
+    //아래 처럼 하거나 아니면 위에 것 처럼 하면 됨.
+    dbService.collection('tweets').onSnapshot((snapshot) => {
+      const tweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      // console.log(tweetArray);
+      setTweets(tweetArray);
+
+      // console.log(snapshot.docs);
+    });
   }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.collection('tweets').add({
-      tweet: tweet,
+      text: tweet,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setTweet('');
   };
@@ -37,7 +51,7 @@ const Home = () => {
     setTweet(value);
   };
 
-  console.log(tweets);
+  // console.log(tweets);
 
   return (
     <div>
@@ -54,7 +68,7 @@ const Home = () => {
       <div>
         {tweets.map((tweet) => (
           <div key={tweet.id}>
-            <h4>{tweet.tweet}</h4>
+            <h4>{tweet.text}</h4>
           </div>
         ))}
       </div>
