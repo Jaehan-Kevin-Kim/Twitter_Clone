@@ -18,6 +18,7 @@ function App() {
       setInit(true);
     });
   }, []);
+
   return (
     <>
       {init ? (
@@ -25,7 +26,7 @@ function App() {
       ) : (
         'Initializing...'
       )}
-      <footer>&copy; Kevin Kim {new Date().getFullYear()}</footer>
+      {/* <footer>&copy; Kevin Kim {new Date().getFullYear()}</footer> */}
     </>
   );
 }
