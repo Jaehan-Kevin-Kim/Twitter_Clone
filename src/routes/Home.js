@@ -7,7 +7,7 @@ const Home = ({ userObj }) => {
   // console.log(userObj);
   const [tweet, setTweet] = useState('');
   const [tweets, setTweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState('');
   // const getTweets = async () => {
   //   const dbTweets = await dbService.collection('tweets').get();
   //   // console.log(dbTweets);
@@ -39,15 +39,24 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
-    const response = await fileRef.putString(attachment, 'data_url');
-    console.log(response);
-    // await dbService.collection('tweets').add({
-    //   text: tweet,
-    //   createdAt: Date.now(),
-    //   creatorId: userObj.uid,
-    // });
-    // setTweet('');
+    let attachmentUrl = '';
+
+    if (attachment !== '') {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, 'data_url');
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+    const tweetObj = {
+      text: tweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
+    await dbService.collection('tweets').add(tweetObj);
+    setTweet('');
+    setAttachment('');
   };
 
   const onChange = (event) => {
