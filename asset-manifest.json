@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Jaehan-Kevin-Kim/Twitter_Clone/static/css/main.dfb46659.chunk.css",
+    "main.js": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/main.dedc6530.chunk.js",
+    "main.js.map": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/main.dedc6530.chunk.js.map",
+    "runtime-main.js": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/runtime-main.135db551.js",
+    "runtime-main.js.map": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/runtime-main.135db551.js.map",
+    "static/js/2.789da773.chunk.js": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/2.789da773.chunk.js",
+    "static/js/2.789da773.chunk.js.map": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/2.789da773.chunk.js.map",
+    "index.html": "/Jaehan-Kevin-Kim/Twitter_Clone/index.html",
+    "static/css/main.dfb46659.chunk.css.map": "/Jaehan-Kevin-Kim/Twitter_Clone/static/css/main.dfb46659.chunk.css.map",
+    "static/js/2.789da773.chunk.js.LICENSE.txt": "/Jaehan-Kevin-Kim/Twitter_Clone/static/js/2.789da773.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.135db551.js",
+    "static/js/2.789da773.chunk.js",
+    "static/css/main.dfb46659.chunk.css",
+    "static/js/main.dedc6530.chunk.js"
+  ]
+}
